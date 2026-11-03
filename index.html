@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#120b31" />
+  <meta name="description" content="Misión: Salva el Mundo Digital. Un videojuego educativo interactivo para estudiantes de secundaria." />
+  <title>Pixel Quest · Salva el Mundo Digital</title>
+  <style>
+    :root{--night:#0b0922;--dark:#130b35;--indigo:#261253;--purple:#8e56ff;--hot:#ff5cbd;--soft:#ffb1de;--cyan:#53e7e5;--lemon:#fff09a;--white:#f9f6ff;--muted:#c9bedf;--line:rgba(224,201,255,.22);--glass:rgba(40,23,89,.67);--ok:#70e7b9;--danger:#ff8baf;--shadow:0 24px 70px rgba(5,2,20,.36)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--white);font-family:ui-rounded,"Trebuchet MS",Verdana,Arial,sans-serif;background:radial-gradient(ellipse 70% 40% at 55% -5%,#5e2f98 0%,transparent 80%),radial-gradient(ellipse 40% 50% at 95% 75%,#2a2467 0%,transparent 85%),var(--night);min-height:100vh;overflow-x:hidden}body::before{content:"";pointer-events:none;position:fixed;inset:0;z-index:-1;background-image:radial-gradient(2px 2px at 8% 12%,#fff9 98%,transparent),radial-gradient(2px 2px at 86% 8%,#fff8 98%,transparent),radial-gradient(2px 2px at 24% 65%,#ffccf5 98%,transparent),radial-gradient(2px 2px at 79% 63%,#b2fffb 98%,transparent),radial-gradient(2px 2px at 43% 88%,#fff8 98%,transparent);background-size:340px 320px;animation:stars 35s linear infinite}@keyframes stars{to{background-position:320px 260px}}
+    button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.65}button:focus-visible,input:focus-visible{outline:3px solid var(--lemon);outline-offset:4px}a{color:var(--cyan)}[hidden]{display:none!important}
+    .shell{max-width:1180px;padding:24px 24px 50px;margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:28px;flex-wrap:wrap}.brand{display:flex;gap:12px;align-items:center;font-weight:1000;letter-spacing:.1em;font-size:16px}.brand-icon{width:42px;height:42px;display:grid;place-items:center;font-size:23px;background:linear-gradient(140deg,var(--hot),#8e53ff);border:2px solid #fff6;box-shadow:0 0 20px #ff6bc055;border-radius:12px;transform:rotate(-7deg)}.brand small{display:block;letter-spacing:.3em;color:var(--cyan);font-size:9px;margin-top:3px}.topbar-controls{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.hud{display:flex;align-items:center;gap:7px;background:#201448c7;border:1px solid var(--line);border-radius:999px;padding:9px 14px;font-weight:900;font-size:13px;white-space:nowrap}.hud strong{color:var(--lemon)}.sound-toggle,.text-button{border:1px solid var(--line);color:var(--white);background:#21144d;border-radius:999px;padding:10px 14px;font-weight:bold}.sound-toggle:hover,.text-button:hover{border-color:var(--hot);background:#34205d}
+    .panel{border:1px solid var(--line);background:var(--glass);border-radius:28px;box-shadow:var(--shadow);backdrop-filter:blur(12px)}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;min-height:565px;overflow:hidden}.hero-copy{padding:56px 20px 42px 51px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;background:#52dbef1b;border:1px solid #75e7fc76;border-radius:99px;color:var(--cyan);font-size:12px;font-weight:900;letter-spacing:.11em;text-transform:uppercase}.eyebrow i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}h1{font-size:clamp(40px,5vw,72px);line-height:1.04;margin:22px 0 15px;letter-spacing:-.055em;font-weight:1000;text-shadow:0 5px 25px #0a041a}h1 em{font-style:normal;color:var(--soft)}.lead{font-size:17px;line-height:1.7;color:var(--muted);max-width:490px;margin:0 0 22px}.chips{display:flex;gap:9px;flex-wrap:wrap;margin:0 0 24px}.chip{border:1px solid #8f7fb86e;border-radius:10px;background:#2012488a;padding:9px 11px;font-size:12px;font-weight:800}.start-form{width:100%;max-width:455px;display:grid;grid-template-columns:1fr 130px;gap:10px}.field{display:flex;flex-direction:column;gap:7px}.field label{color:var(--muted);font-size:12px;font-weight:800}.field input{height:47px;width:100%;border-radius:12px;background:#100d32;border:1px solid #6c5a9a;color:var(--white);padding:10px 13px;min-width:0}.field input::placeholder{color:#a294c4}.btn{border:none;border-radius:14px;padding:15px 19px;color:#251038;font-weight:1000;font-size:15px;transition:transform .15s ease,filter .15s ease,box-shadow .15s ease;background:linear-gradient(135deg,var(--soft),var(--hot));box-shadow:0 7px 0 #9b286f,0 16px 30px #ff54a11f}.btn:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.09)}.btn:active:not(:disabled){transform:translateY(4px);box-shadow:0 3px 0 #9b286f}.btn.secondary{background:linear-gradient(135deg,#a9fffd,var(--cyan));box-shadow:0 7px 0 #168f9e,0 15px 30px #1de4de25}.btn.ghost{background:#24164f;color:var(--white);border:1px solid #775da5;box-shadow:none}.btn.ghost:hover{background:#38246b}.start-btn{grid-column:1/-1;margin-top:6px}.tiny-note{font-size:12px;color:var(--muted);margin-top:15px;line-height:1.6}
+    .hero-art{position:relative;overflow:hidden;min-height:530px;background:radial-gradient(circle at 56% 46%,#803bd55c 0%,transparent 48%),linear-gradient(170deg,#34146a55,#090b24);border-left:1px solid var(--line)}.hero-art::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 49px,#d9a1ff12 50px 51px),repeating-linear-gradient(90deg,transparent 0 49px,#d9a1ff12 50px 51px);transform:perspective(250px) rotateX(34deg) scale(1.7);transform-origin:bottom;opacity:.8}.moon{position:absolute;width:260px;height:260px;left:50%;top:12%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,#d6b4ff30,#a07bff1a 55%,transparent 70%);border:1px solid #c58bff35;box-shadow:0 0 80px #f17bea32}.portal{position:absolute;width:260px;height:280px;left:50%;top:30%;transform:translateX(-50%);border:13px solid #f4b6ff;border-bottom-width:22px;border-radius:48% 48% 10px 10px;box-shadow:0 0 0 10px #b356ff5c,0 0 40px #d35cfd, inset 0 0 50px #fe79ff99;background:radial-gradient(circle,#8040d1,#2e1657 65%,#1c1646);animation:portalGlow 2s ease-in-out infinite alternate}@keyframes portalGlow{to{box-shadow:0 0 0 10px #b356ff5c,0 0 65px #ee65fc,inset 0 0 65px #fe79ff99}}.platform{position:absolute;left:8%;right:8%;height:88px;bottom:35px;border-radius:50%;background:radial-gradient(ellipse,#d34fd7b0 0%,#7432ab86 50%,transparent 75%);filter:blur(6px)}.float-emoji{position:absolute;font-size:31px;filter:drop-shadow(0 0 15px #c77aff);animation:bob 3s ease-in-out infinite}.float-emoji.a{left:13%;top:16%}.float-emoji.b{right:10%;top:26%;animation-delay:.6s}.float-emoji.c{left:17%;bottom:21%;animation-delay:1.2s}.float-emoji.d{right:13%;bottom:19%;animation-delay:1.9s}@keyframes bob{50%{transform:translateY(-16px) rotate(7deg)}}
+    .bot{position:absolute;z-index:3;left:50%;top:44%;transform:translate(-50%,-5%);width:168px;height:176px;animation:botFloat 3s ease-in-out infinite;filter:drop-shadow(0 16px 20px #14012f)}@keyframes botFloat{50%{transform:translate(-50%,-15%)}}.bot .antenna{position:absolute;width:10px;height:32px;background:#ffd1f0;left:79px;top:-13px;border-radius:7px}.bot .antenna::before{content:"";display:block;width:23px;height:23px;border-radius:50%;background:#ffe89b;box-shadow:0 0 22px #ffdb84;position:absolute;left:-6px;top:-12px}.bot .head{position:absolute;top:17px;left:10px;width:148px;height:109px;background:linear-gradient(145deg,#ffe1f7,#ee9ae7);border:7px solid #8651c1;border-radius:32px;box-shadow:inset 0 -10px #c96dbb}.bot .visor{position:absolute;background:#25184c;width:112px;height:56px;top:20px;left:11px;border-radius:18px;display:flex;align-items:center;justify-content:space-evenly}.bot .eye{width:17px;height:27px;border-radius:9px;background:#67f6e8;box-shadow:0 0 13px #5afbe2;animation:blink 5s infinite}@keyframes blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.13)}}.bot .blush{position:absolute;width:23px;height:7px;border-radius:5px;background:#ff5aa6;bottom:9px;left:19px;box-shadow:68px 0 #ff5aa6}.bot .body{position:absolute;left:36px;top:116px;width:96px;height:56px;background:#c3a8ff;border:7px solid #714bb2;border-radius:17px}.bot .body::after{content:"✦";color:#fff1a1;font-size:25px;position:absolute;top:3px;left:30px}.bot .arm{position:absolute;top:125px;width:28px;height:46px;border:6px solid #7952b4;background:#f8b6eb;border-radius:15px}.bot .arm.left{left:1px;transform:rotate(23deg)}.bot .arm.right{right:1px;transform:rotate(-23deg)}.bot .foot{position:absolute;bottom:-6px;width:36px;height:14px;background:#7854ba;border-radius:8px}.bot .foot.l{left:40px}.bot .foot.r{right:40px}.art-caption{position:absolute;bottom:19px;left:0;right:0;text-align:center;color:#e7c9ff;font-weight:900;font-size:12px;letter-spacing:.24em}
+    .page-title{font-size:clamp(29px,4vw,47px);line-height:1.15;letter-spacing:-.03em;margin:12px 0}.page-sub{color:var(--muted);font-size:15px;line-height:1.6}.map-top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}.map-progress{width:min(340px,100%);padding:16px 20px}.barline{height:12px;background:#100d32;border:1px solid #61508c;overflow:hidden;border-radius:99px}.barfill{height:100%;width:0;background:linear-gradient(90deg,#63e7e7,#ff7dcc);border-radius:99px;transition:width .5s}.map-headline{display:flex;justify-content:space-between;font-size:12px;font-weight:900;color:var(--muted);margin-bottom:9px}.world-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px;counter-reset:mission}.world-card{position:relative;min-height:245px;text-align:left;border:1px solid #765caa8c;color:var(--white);border-radius:25px;background:linear-gradient(145deg,#34205fb5,#1b1241dc);padding:20px;display:flex;flex-direction:column;gap:6px;transition:transform .15s,border-color .2s,box-shadow .2s;overflow:hidden}.world-card::after{content:"";position:absolute;width:170px;height:170px;background:var(--worldColor,#9e4bdb);filter:blur(72px);opacity:.17;right:-50px;top:-40px;pointer-events:none}.world-card:not(:disabled):hover{transform:translateY(-5px);border-color:var(--worldColor);box-shadow:0 16px 32px #07051c70}.world-card.locked{filter:grayscale(.65);opacity:.54}.world-card.current{border-color:var(--hot);box-shadow:inset 0 0 0 1px #ffb1e557,0 9px 30px #ff7acc16}.world-card.done{border-color:#69e8c085}.world-status{font-size:10px;font-weight:900;letter-spacing:.1em;color:var(--cyan);text-transform:uppercase}.world-illustration{display:flex;align-items:center;justify-content:space-between;margin:13px 0}.world-illustration .emblem{width:85px;height:85px;display:grid;place-items:center;font-size:49px;border-radius:23px;background:linear-gradient(135deg,#55317f,#311b64);border:2px solid #ad7cff8a;box-shadow:inset 0 0 18px #cb87fe30}.world-illustration .world-number{font-size:48px;color:#a28abc44;font-weight:1000}.world-name{font-size:20px;font-weight:1000;letter-spacing:-.025em;line-height:1.15}.world-desc{color:var(--muted);font-size:12px;line-height:1.55}.world-action{margin-top:auto;padding-top:12px;color:var(--soft);font-weight:1000;font-size:12px}.map-footer{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:20px;align-items:center}.map-footer .tiny-note{margin:0}
+    .play-layout{display:grid;grid-template-columns:270px minmax(0,1fr);gap:18px}.play-sidebar{padding:22px;display:flex;flex-direction:column;gap:16px}.sidebar-visual{height:145px;border-radius:20px;display:grid;place-items:center;font-size:75px;background:radial-gradient(circle,#884fff77,#26114fa3 68%);position:relative}.sidebar-visual::before,.sidebar-visual::after{content:"✦";position:absolute;color:var(--soft);font-size:18px}.sidebar-visual::before{top:16px;left:27px}.sidebar-visual::after{bottom:17px;right:29px}.play-sidebar h2{font-size:20px;margin:0}.play-sidebar p{color:var(--muted);line-height:1.55;font-size:13px;margin:0}.sidebar-label{color:var(--muted);font-size:11px;letter-spacing:.1em;font-weight:1000;text-transform:uppercase}.hearts{font-size:27px;letter-spacing:4px;margin-top:3px;min-height:36px}.q-dots{display:flex;gap:7px;flex-wrap:wrap}.q-dot{width:29px;height:10px;border-radius:10px;background:#59437c}.q-dot.past{background:var(--cyan)}.q-dot.now{background:var(--hot)}.question-card{padding:clamp(20px,4vw,42px);min-height:605px}.question-top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:20px;flex-wrap:wrap}.mission-tag{color:var(--cyan);font-size:12px;font-weight:1000;letter-spacing:.12em}.question-count{background:#25194f;padding:9px 13px;border-radius:999px;border:1px solid var(--line);font-size:12px;font-weight:900}.question-card h2{font-size:clamp(23px,3vw,35px);line-height:1.25;letter-spacing:-.035em;margin:12px 0 18px}.scene{position:relative;background:linear-gradient(130deg,#20144e,#15132d);border:1px solid #8667c47f;border-radius:22px;min-height:132px;margin:0 0 23px;padding:22px 26px;display:flex;align-items:center;gap:20px;overflow:hidden}.scene::after{content:"";position:absolute;width:170px;height:170px;border-radius:50%;background:#b766d72d;filter:blur(27px);right:-50px;top:-45px}.scene-emoji{font-size:61px;min-width:75px;text-align:center;filter:drop-shadow(0 8px 12px #9c3cff55)}.scene-text{font-size:15px;line-height:1.6;color:#efe8ff;font-weight:750;overflow-wrap:anywhere}.answer-label{font-size:11px;text-transform:uppercase;letter-spacing:.16em;font-weight:1000;color:var(--muted);margin:0 0 12px}.answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}.answer{min-height:85px;border:1px solid #705799;color:var(--white);background:#271a54;border-radius:16px;padding:14px 15px;display:flex;align-items:center;gap:13px;text-align:left;transition:border-color .15s,background .15s,transform .15s;font-weight:850;font-size:14px;line-height:1.4}.answer:hover:not(:disabled){border-color:#d9a6ff;transform:translateY(-2px);background:#3b246e}.answer .key{background:#4a3779;display:grid;place-items:center;min-width:30px;height:30px;border:1px solid #997bbd;border-radius:9px;color:#e7deff;font-size:12px;font-weight:1000}.answer.correct{border-color:var(--ok);background:#145b5185}.answer.correct .key{background:#139f7c;color:#fff}.answer.incorrect{border-color:var(--danger);background:#6d285780;opacity:.65}.feedback{border:1px solid var(--ok);background:#13574d8c;border-radius:15px;margin-top:15px;padding:16px 18px;color:#d7fff2;line-height:1.6;font-size:14px}.feedback.bad{border-color:#ff9ca4;background:#6c264c6b;color:#ffe9f5}.feedback strong{display:block;margin-bottom:4px;font-size:15px}.question-actions{display:flex;justify-content:flex-end;margin-top:18px;gap:10px}.question-actions .btn{min-width:198px}.footnote{font-size:12px;color:var(--muted);text-align:right;margin-top:14px}
+    .center-card{max-width:780px;margin:40px auto;padding:clamp(25px,5vw,52px);text-align:center}.big-symbol{font-size:82px;display:block;filter:drop-shadow(0 0 27px #fa88d86b);animation:bob 3.5s ease-in-out infinite}.center-card h2{font-size:clamp(31px,5vw,53px);margin:14px 0;letter-spacing:-.04em}.center-card p{color:var(--muted);line-height:1.7;font-size:16px}.result-score{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:26px 0}.score-box{background:#1b1341;border:1px solid var(--line);padding:17px 10px;border-radius:16px}.score-box strong{font-size:29px;color:var(--lemon);display:block}.score-box span{font-size:12px;color:var(--muted);font-weight:900}.action-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}.victory-name{color:var(--soft)}.pill{display:inline-flex;padding:9px 14px;border:1px solid #fbb3ea;background:#ffb2df1a;border-radius:999px;color:#ffcbef;font-weight:1000;font-size:12px;letter-spacing:.09em}.sparkle-line{font-size:22px;letter-spacing:18px;color:var(--lemon)}.copyright-note{text-align:center;font-size:11px;color:#a394c7;margin-top:27px;line-height:1.6}.toast{position:fixed;z-index:20;bottom:20px;left:50%;transform:translateX(-50%);background:#fff1ff;color:#251538;border-radius:14px;padding:13px 18px;max-width:calc(100% - 32px);box-shadow:0 12px 40px #0009;font-size:13px;font-weight:900}
+    .print-certificate{display:none}
+    @media(max-width:900px){.hero{grid-template-columns:1fr}.hero-copy{padding:40px}.hero-art{min-height:390px;border-left:none;border-top:1px solid var(--line)}.portal{top:23%;transform:translateX(-50%) scale(.86)}.bot{top:38%;transform:translate(-50%,-5%) scale(.83)}.world-map{grid-template-columns:repeat(2,minmax(0,1fr))}.play-layout{grid-template-columns:1fr}.play-sidebar{display:grid;grid-template-columns:100px 1fr 130px;align-items:center;gap:15px}.sidebar-visual{height:100px;font-size:51px}.play-sidebar p{display:none}.play-sidebar h2{font-size:17px}.play-sidebar .text-button{grid-column:1/-1;justify-self:start}}
+    @media(max-width:600px){.shell{padding:14px 12px 30px}.topbar{margin-bottom:16px}.brand{font-size:13px}.topbar-controls{gap:5px}.hud{font-size:11px;padding:7px 10px}.hero-copy{padding:30px 22px 28px}.hero-art{min-height:325px}.moon{width:190px;height:190px}.portal{top:15%;transform:translateX(-50%) scale(.73)}.bot{top:32%;transform:translate(-50%,-8%) scale(.75)}.art-caption{font-size:10px}.lead{font-size:15px}.start-form{grid-template-columns:1fr}.start-btn{grid-column:auto}.world-map{grid-template-columns:1fr;gap:12px}.world-card{min-height:173px}.world-illustration{margin:5px 0}.world-illustration .emblem{width:62px;height:62px;font-size:39px;border-radius:16px}.world-illustration .world-number{font-size:38px}.world-name{font-size:19px}.play-sidebar{grid-template-columns:65px 1fr;gap:12px}.sidebar-visual{height:70px;font-size:38px}.play-sidebar .misc-stats{grid-column:1/-1}.question-card{min-height:0}.scene{padding:15px;gap:9px;min-height:105px}.scene-emoji{font-size:41px;min-width:50px}.scene-text{font-size:13px}.answers{grid-template-columns:1fr;gap:8px}.answer{min-height:65px;padding:10px 12px;font-size:13px}.result-score{gap:6px}.score-box{padding:12px 5px}.score-box strong{font-size:21px}.score-box span{font-size:10px}.action-row .btn{width:100%}.question-actions .btn{width:100%}.footnote{text-align:center}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+    @page{size:landscape;margin:12mm}
+    @media print{html,body{background:#fff!important;color:#221247!important;margin:0;padding:0}body::before,.shell,.toast{display:none!important}.print-certificate{display:flex!important;min-height:165mm;border:9px double #a54dad;border-radius:24px;align-items:center;justify-content:center;text-align:center;flex-direction:column;gap:7px;padding:20mm;background:#fff8fd!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}.print-certificate .medal{font-size:50px}.print-certificate h1{font-size:42px;letter-spacing:.01em;color:#4c2671;text-shadow:none;margin:10px 0}.print-certificate h2{font-size:28px;margin:8px 0;color:#a52c92}.print-certificate p{color:#59456b;font-size:16px;margin:5px 0}.print-certificate .rule{width:80%;border-top:3px solid #a64dba;margin:13px 0}.print-certificate .meta{font-size:14px;color:#715d7c}}
+  </style>
+</head>
+<body>
+  <div class="shell" id="app">
+    <header class="topbar">
+      <div class="brand"><span class="brand-icon" aria-hidden="true">🎮</span><span>PIXEL QUEST<small>ACADEMIA DIGITAL</small></span></div>
+      <div class="topbar-controls">
+        <div class="hud" aria-label="Puntuación">⭐ <strong id="global-score">0</strong> puntos</div>
+        <div class="hud" aria-label="Misiones completadas">🏅 <strong id="global-progress">0/5</strong></div>
+        <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="false" title="Activar o desactivar efectos de sonido">🔇 Sonido</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="screen-start" class="panel hero" aria-labelledby="start-heading">
+        <div class="hero-copy">
+          <div class="eyebrow"><i></i> Un videojuego para aprender</div>
+          <h1 id="start-heading">SALVA EL<br /><em>MUNDO DIGITAL</em></h1>
+          <p class="lead">¡Alerta! Un misterioso virus está apagando las cinco zonas de Pixel City. Solo una mente curiosa podrá superar los retos y recuperar la energía de la ciudad.</p>
+          <div class="chips"><span class="chip">🌎 5 mundos</span><span class="chip">🧠 25 desafíos</span><span class="chip">🏆 Constancia final</span></div>
+          <form id="start-form" class="start-form" autocomplete="off">
+            <div class="field"><label for="player-name">Nombre del agente *</label><input id="player-name" maxlength="45" placeholder="Escribe tu nombre" required autocomplete="name" /></div>
+            <div class="field"><label for="player-group">Grado y grupo</label><input id="player-group" maxlength="24" placeholder="Ej. 1° A" /></div>
+            <button class="btn start-btn" type="submit" id="start-action">🚀 INICIAR AVENTURA</button>
+          </form>
+          <div class="tiny-note">Tu avance se guarda únicamente en este navegador. No se envían nombres ni respuestas a ningún servidor. 🎧 El sonido es opcional.</div>
+        </div>
+        <div class="hero-art" aria-label="Un robot rosa frente a un portal de videojuegos">
+          <div class="moon"></div><div class="portal"></div><div class="platform"></div>
+          <span class="float-emoji a" aria-hidden="true">⭐</span><span class="float-emoji b" aria-hidden="true">💾</span><span class="float-emoji c" aria-hidden="true">🛡️</span><span class="float-emoji d" aria-hidden="true">⚡</span>
+          <div class="bot" aria-hidden="true"><div class="antenna"></div><div class="arm left"></div><div class="arm right"></div><div class="body"></div><div class="foot l"></div><div class="foot r"></div><div class="head"><div class="visor"><div class="eye"></div><div class="eye"></div></div><div class="blush"></div></div></div>
+          <div class="art-caption">READY PLAYER ONE?</div>
+        </div>
+      </section>
+
+      <section id="screen-map" hidden aria-labelledby="map-heading">
+        <div class="map-top">
+          <div><div class="eyebrow"><i></i> Centro de misiones</div><h1 class="page-title" id="map-heading">🗺️ Mapa de Pixel City</h1><p class="page-sub" id="map-greeting">¡Elige tu siguiente misión!</p></div>
+          <div class="panel map-progress"><div class="map-headline"><span>ENERGÍA RESTAURADA</span><span id="map-percent">0%</span></div><div class="barline"><div class="barfill" id="map-bar"></div></div></div>
+        </div>
+        <div class="world-map" id="world-map" aria-label="Misiones disponibles"></div>
+        <div class="map-footer"><span class="tiny-note">💡 Completa una zona para desbloquear la siguiente. Puedes repetir las ya superadas para practicar.</span><button class="text-button" type="button" id="new-game">↻ Nueva partida</button></div>
+      </section>
+
+      <section id="screen-play" hidden aria-label="Desafío actual">
+        <div class="play-layout">
+          <aside class="panel play-sidebar">
+            <div class="sidebar-visual" id="sidebar-icon" aria-hidden="true">🖥️</div>
+            <div><div class="sidebar-label">MISIÓN EN CURSO</div><h2 id="sidebar-title"></h2><p id="sidebar-story"></p></div>
+            <div class="misc-stats"><div class="sidebar-label">TUS VIDAS</div><div class="hearts" id="hearts" aria-label="3 vidas">💗💗💗</div><div class="sidebar-label" style="margin-top:12px">PROGRESO</div><div class="q-dots" id="q-dots" aria-label="Progreso del nivel"></div><div class="sidebar-label" style="margin-top:16px">PUNTOS DE ESTA MISIÓN</div><div style="color:var(--lemon);font-weight:1000;font-size:22px;margin-top:4px" id="mission-score">0</div></div>
+            <button class="text-button" type="button" id="back-map">← Volver al mapa</button>
+          </aside>
+          <article class="panel question-card" aria-labelledby="question-title">
+            <div class="question-top"><div class="mission-tag" id="question-tag">NIVEL 01 · RETO</div><div class="question-count" id="question-count">DESAFÍO 1/5</div></div>
+            <div class="eyebrow"><i></i> ¡Decide tu siguiente movimiento!</div>
+            <h2 id="question-title">¿Listo para iniciar?</h2>
+            <div class="scene"><div class="scene-emoji" id="scene-emoji" aria-hidden="true">💻</div><div class="scene-text" id="scene-text"></div></div>
+            <p class="answer-label">SELECCIONA TU RESPUESTA</p>
+            <div class="answers" id="answers"></div>
+            <div id="feedback" role="status" aria-live="polite" hidden></div>
+            <div class="question-actions"><button type="button" id="next-question" class="btn secondary" hidden>CONTINUAR →</button></div>
+            <div class="footnote">Puedes usar las teclas 1, 2, 3, 4 para responder.</div>
+          </article>
+        </div>
+      </section>
+
+      <section id="screen-failed" class="panel center-card" hidden aria-labelledby="failed-title"><span class="big-symbol" aria-hidden="true">🔋</span><span class="pill">MISIÓN EN PAUSA</span><h2 id="failed-title">¡Recarga tu energía!</h2><p>Te quedaste sin corazones en este intento. Cada error es una pista para aprender: puedes volver a jugar el nivel sin perder los mundos que ya completaste.</p><div class="action-row"><button type="button" class="btn" id="retry-level">🔄 REINTENTAR NIVEL</button><button type="button" class="btn ghost" id="failed-map">🗺️ IR AL MAPA</button></div></section>
+
+      <section id="screen-clear" class="panel center-card" hidden aria-labelledby="clear-title"><span class="big-symbol" id="clear-symbol" aria-hidden="true">🌟</span><span class="pill">MISIÓN COMPLETADA</span><h2 id="clear-title">¡Zona restaurada!</h2><p id="clear-text"></p><div class="result-score"><div class="score-box"><strong id="clear-points">0</strong><span>PUNTOS DEL NIVEL</span></div><div class="score-box"><strong id="clear-hearts">3</strong><span>CORAZONES RESTANTES</span></div><div class="score-box"><strong id="clear-completed">1/5</strong><span>MUNDOS COMPLETADOS</span></div></div><div class="action-row"><button type="button" class="btn secondary" id="clear-next">➡ SIGUIENTE NIVEL</button><button type="button" class="btn ghost" id="clear-map">🗺️ VER MAPA</button></div></section>
+
+      <section id="screen-victory" class="panel center-card" hidden aria-labelledby="victory-title"><div class="sparkle-line" aria-hidden="true">✦ ✨ ✦</div><span class="big-symbol" aria-hidden="true">🏆</span><span class="pill">CIUDAD SALVADA · 5/5 MUNDOS</span><h2 id="victory-title">¡MISIÓN CUMPLIDA!</h2><p><strong class="victory-name" id="winner-name"></strong>, has restaurado Pixel City. Superaste 25 desafíos sobre tecnología, ciudadanía digital, ciberseguridad e inteligencia artificial. ¡Tu constancia está lista!</p><div class="result-score"><div class="score-box"><strong id="win-score">0</strong><span>PUNTUACIÓN TOTAL</span></div><div class="score-box"><strong>25</strong><span>RETOS SUPERADOS</span></div><div class="score-box"><strong>5/5</strong><span>MUNDOS RECUPERADOS</span></div></div><div class="action-row"><button type="button" class="btn" id="certificate-btn">📜 GUARDAR CONSTANCIA PDF</button><button type="button" class="btn ghost" id="win-map">🗺️ VER MIS MUNDOS</button></div><p class="tiny-note">En Chrome, elige “Guardar como PDF” en la ventana de impresión. También puedes imprimirla en papel.</p></section>
+    </main>
+    <footer class="copyright-note">🎮 PIXEL QUEST · Proyecto educativo para secundaria · Sin anuncios, sin cuentas y sin conexión obligatoria a internet</footer>
+  </div>
+
+  <section class="print-certificate" id="print-certificate" aria-label="Constancia de participación">
+    <div class="medal">🏆 🧠 🎮</div>
+    <p>ACADEMIA DIGITAL · PIXEL QUEST</p>
+    <h1>CONSTANCIA DE MISIÓN COMPLETADA</h1>
+    <p>Se reconoce a</p>
+    <h2 id="cert-name">Agente digital</h2>
+    <p id="cert-group"></p>
+    <div class="rule"></div>
+    <p>Por superar los 25 desafíos y restaurar los 5 mundos de</p>
+    <h2>«Salva el Mundo Digital»</h2>
+    <p>Hardware · Ciudadanía digital · Ciberseguridad · Inteligencia artificial</p>
+    <div class="rule"></div>
+    <p class="meta"><span id="cert-date"></span> · Puntuación: <strong id="cert-score">0</strong> puntos · Materia: Tecnología</p>
+  </section>
+
+  <div class="toast" role="status" id="toast" hidden></div>
+
+  <script>
+    'use strict';
+    const MISSIONS = [
+      {id:'hardware',title:'Laboratorio del Hardware',short:'Descubre qué hay dentro de la computadora.',place:'Distrito de Circuitos',icon:'🖥️',color:'#a57aff',intro:'El corazón de Pixel City no enciende. Identifica sus piezas y restaura el laboratorio.',questions:[
+        {icon:'🧠',title:'¡El cerebro se desconectó!',scene:'El robot necesita el componente que procesa instrucciones y realiza cálculos.',options:['Memoria USB','Procesador (CPU)','Monitor','Teclado'],correct:1,why:'La CPU interpreta instrucciones y realiza operaciones. ¡Es esencial para que la computadora funcione!'},
+        {icon:'🖱️',title:'¿Quién envía instrucciones?',scene:'Debes elegir un periférico de entrada para controlar el cursor.',options:['Bocinas','Impresora','Ratón (mouse)','Proyector'],correct:2,why:'El ratón es un dispositivo de entrada: transmite movimientos y clics a la computadora.'},
+        {icon:'⌨️',title:'Código urgente en pantalla',scene:'Para escribir una contraseña en el equipo de prueba, ¿qué dispositivo usarías?',options:['Teclado','Monitor','Bocinas','Impresora'],correct:0,why:'El teclado permite introducir letras, números y otros caracteres.'},
+        {icon:'🖨️',title:'¡Saca el plano del robot!',scene:'Necesitas obtener en papel el diseño de una pieza. Elige un periférico de salida.',options:['Micrófono','Escáner','Cámara web','Impresora'],correct:3,why:'La impresora recibe información de la computadora y la presenta en papel; es de salida.'},
+        {icon:'🔧',title:'Último reto del laboratorio',scene:'Una Chromebook funciona lentamente. ¿Qué acción ayuda a prolongar su vida útil?',options:['Tirarla de inmediato','Instalar programas desconocidos','Darle mantenimiento y cuidar su almacenamiento','Dejarla siempre bajo el sol'],correct:2,why:'Cuidar, mantener y reparar los dispositivos reduce residuos electrónicos y prolonga su utilidad.'}
+      ]},
+      {id:'ciudadania',title:'Ciudadanía Digital',short:'Toma buenas decisiones en internet.',place:'Plaza de la Netiqueta',icon:'🌐',color:'#66e0dc',intro:'La plaza está llena de mensajes confusos. Ayuda a que su comunidad conviva de forma responsable.',questions:[
+        {icon:'💬',title:'Un chat necesita un héroe',scene:'En el grupo de clase alguien comete un error. ¿Qué mensaje demuestra netiqueta?',options:['“Aprende a usar la computadora”','“Podemos revisarlo juntos, sin problema”','Enviar memes para burlarse','Escribir insultos en MAYÚSCULAS'],correct:1,why:'La netiqueta fomenta el respeto, la empatía y la comunicación clara en ambientes digitales.'},
+        {icon:'👣',title:'Rastros que permanecen',scene:'Publicaste una foto y después la borraste. ¿Qué debes recordar?',options:['Todo desaparece por completo','Nadie pudo verla','Alguien pudo guardarla o compartirla','Internet nunca guarda información'],correct:2,why:'La huella digital incluye rastros de nuestra actividad; borrar una publicación no garantiza eliminar todas sus copias.'},
+        {icon:'📸',title:'Foto de trabajo en equipo',scene:'Quieres publicar una foto donde aparecen otras personas. ¿Qué haces primero?',options:['Pedirles permiso','Etiquetarlas sin avisar','Compartirla sin preguntar','Publicar sus datos personales'],correct:0,why:'Solicitar consentimiento respeta la privacidad y la imagen de las demás personas.'},
+        {icon:'📚',title:'El misterio de la fuente',scene:'Usaste información e imágenes de un sitio web para una tarea escolar.',options:['Decir que todo es tuyo','Eliminar el nombre del autor','Cambiar una palabra y no citar','Dar crédito a las fuentes consultadas'],correct:3,why:'Citar las fuentes reconoce el trabajo original y ayuda a comprobar la información.'},
+        {icon:'🔒',title:'La puerta de la privacidad',scene:'Una aplicación de juegos quiere acceder a todos tus contactos sin necesitarlo.',options:['Autorizar siempre','Compartir tu lista completa','Revisar y limitar los permisos','Publicar los contactos en un chat'],correct:2,why:'Conceder solo los permisos necesarios ayuda a proteger tu información personal.'}
+      ]},
+      {id:'seguridad',title:'Fortaleza de Ciberseguridad',short:'Identifica riesgos y protege tus cuentas.',place:'Muralla de los Datos',icon:'🛡️',color:'#ff91be',intro:'Una tormenta de mensajes falsos se acerca. Defiende los datos de Pixel City.',questions:[
+        {icon:'📧',title:'¡Alerta de mensaje sospechoso!',scene:'Mensaje simulado: “¡TU CUENTA SE CERRARÁ HOY! Entra ya en premio-urgente.example y escribe tu contraseña”.',options:['Entrar al enlace inmediatamente','Compartir tu contraseña','Verificar desde la página o app oficial sin usar ese enlace','Reenviar el mensaje a todos'],correct:2,why:'La urgencia y la petición de contraseñas son señales de phishing. Revisa el asunto por canales oficiales.'},
+        {icon:'🔑',title:'Crea un escudo de contraseña',scene:'¿Cuál es la mejor estrategia para proteger una cuenta?',options:['Una contraseña larga, única y difícil de adivinar','Usar 12345678','Compartirla con amistades','Repetir la misma en todas las cuentas'],correct:0,why:'Las contraseñas largas y únicas son más resistentes. Un administrador de contraseñas puede ayudar.'},
+        {icon:'📱',title:'La segunda llave',scene:'Además de la contraseña, el sitio solicita una verificación adicional. ¿Para qué sirve?',options:['Para hacer lento el dispositivo','Para añadir otra capa de seguridad','Para publicar tu ubicación','Para quitar la privacidad'],correct:1,why:'La autenticación en dos pasos ayuda a proteger la cuenta si alguien descubre tu contraseña.'},
+        {icon:'🏫',title:'Computadora compartida',scene:'Acabas de usar tu cuenta escolar en un equipo que también utilizan otras personas.',options:['Dejar tu sesión abierta','Guardar tu contraseña en notas públicas','Compartir el acceso','Cerrar sesión al terminar'],correct:3,why:'Cerrar sesión en dispositivos compartidos evita que otras personas usen tu cuenta sin permiso.'},
+        {icon:'📎',title:'Archivo misterioso',scene:'Una persona desconocida te envía un adjunto inesperado y te pide abrirlo.',options:['Abrirlo sin revisar','Desactivar la seguridad del navegador','No abrirlo y verificar con un adulto o docente de confianza','Reenviarlo a tus compañeros'],correct:2,why:'Los archivos inesperados pueden ser peligrosos. Verificar su procedencia es una buena práctica.'}
+      ]},
+      {id:'ia',title:'Torre de Inteligencia Artificial',short:'Aprende a usar la IA con criterio.',place:'Torre de los Algoritmos',icon:'🤖',color:'#ffdc88',intro:'El asistente de la torre perdió su orientación. Entrénalo con decisiones responsables.',questions:[
+        {icon:'🧩',title:'El poder de reconocer patrones',scene:'¿Qué puede hacer un sistema de IA entrenado con datos?',options:['Pensar exactamente como un humano','Reconocer patrones y generar predicciones','Saber siempre la verdad','Funcionar sin ningún recurso'],correct:1,why:'Muchos sistemas de IA encuentran patrones en datos para clasificar, predecir o generar contenido.'},
+        {icon:'⚖️',title:'¿La IA siempre es justa?',scene:'Un sistema produce resultados desfavorables para cierto grupo por los datos con los que se entrenó.',options:['Es imposible que ocurra','Todos los algoritmos son neutrales','Puede reflejar sesgos en sus datos o diseño','Se soluciona creyendo todo lo que dice'],correct:2,why:'Los datos y las decisiones de diseño pueden introducir sesgos. Es importante evaluar los resultados.'},
+        {icon:'🔎',title:'Respuesta bajo investigación',scene:'La IA te entrega un dato para tu tarea, pero no incluye fuentes confiables.',options:['Comprobarlo con fuentes verificables','Copiarlo sin leer','Asumir que no puede equivocarse','Presentarlo como hecho comprobado'],correct:0,why:'La IA puede equivocarse o inventar datos. Conviene contrastar la información con fuentes fiables.'},
+        {icon:'💡',title:'El mejor mensaje para la IA',scene:'Necesitas ayuda para entender cómo funciona el reciclaje electrónico. ¿Qué solicitud es más clara?',options:['“Haz algo”','“Tecnología”','“No sé”','“Explícame en cinco pasos el reciclaje electrónico para secundaria”'],correct:3,why:'Una instrucción específica, con contexto y resultado esperado, suele producir una respuesta más útil.'},
+        {icon:'📝',title:'Uso responsable de herramientas',scene:'Preparas una actividad escolar con ayuda de una herramienta de IA. ¿Qué es correcto?',options:['No revisar el contenido','Entregarlo sin comprenderlo','Revisarlo, aprender y seguir las reglas de tu escuela','Compartir datos privados de compañeros'],correct:2,why:'La IA puede apoyar el aprendizaje, pero hay que revisar su contenido y respetar las reglas de clase.'}
+      ]},
+      {id:'boss',title:'Jefe Final: Virus del Caos',short:'Combina tus habilidades y salva la ciudad.',place:'Núcleo de Pixel City',icon:'👾',color:'#ff709f',intro:'¡El Virus del Caos apareció! Demuestra todo lo aprendido para recuperar la energía central.',questions:[
+        {icon:'🔌',title:'FASE 1 · Memoria en peligro',scene:'El virus intenta confundir los componentes. ¿Para qué se utiliza principalmente la RAM?',options:['Para guardar archivos indefinidamente','Para imprimir documentos','Para almacenar temporalmente datos en uso','Para conectar la computadora al enchufe'],correct:2,why:'La RAM guarda temporalmente los datos de los programas que se están usando.'},
+        {icon:'♻️',title:'FASE 2 · Residuos electrónicos',scene:'Una tableta ya no puede repararse. ¿Qué conviene hacer?',options:['Llevarla a un punto autorizado de recolección electrónica','Arrojarla a un río','Quemarla','Tirarla con cualquier basura'],correct:0,why:'Los centros de recolección adecuados permiten gestionar componentes y materiales de forma más segura.'},
+        {icon:'🗣️',title:'FASE 3 · Comentarios hostiles',scene:'Alguien publica una burla hacia un compañero. ¿Qué respuesta ayuda?',options:['Sumarse a la burla','Difundir el comentario','Escribir insultos más fuertes','No participar y pedir apoyo a una persona adulta de confianza'],correct:3,why:'No amplificar las agresiones y pedir apoyo son maneras responsables de actuar ante el ciberacoso.'},
+        {icon:'🎣',title:'FASE 4 · Trampa del virus',scene:'Recibes un enlace inesperado que promete un premio si escribes tus datos personales.',options:['Compartir todos tus datos','Desconfiar y verificar la fuente por otro medio','Enviar el enlace al grupo','Desactivar las protecciones del navegador'],correct:1,why:'Las ofertas demasiado buenas y las solicitudes inesperadas de datos son señales de alerta.'},
+        {icon:'🧠',title:'FASE 5 · La respuesta inteligente',scene:'Un chatbot asegura que un dato histórico es correcto, pero no muestra evidencia.',options:['Publicarlo de inmediato','Creerlo porque viene de una IA','Verificarlo en fuentes confiables','Usarlo sin leer'],correct:2,why:'La verificación sigue siendo necesaria cuando usamos sistemas de inteligencia artificial.'}
+      ]}
+    ];
+
+    const STORE_KEY = 'pixelquest_digital_v1';
+    const $ = id => document.getElementById(id);
+    const screens = ['start','map','play','failed','clear','victory'];
+    const newState = () => ({name:'',group:'',completed:[],score:0});
+    let state = newState();
+    let game = null;
+    let muted = true;
+    let soundContext = null;
+    let toastTimer;
+
+    function readState(){
+      try {
+        const s=JSON.parse(localStorage.getItem(STORE_KEY));
+        if(s && typeof s.name==='string' && Array.isArray(s.completed) && typeof s.score==='number'){
+          state={name:s.name.slice(0,45),group:String(s.group||'').slice(0,24),completed:s.completed.filter(x=>MISSIONS.some(m=>m.id===x)),score:Math.max(0,Math.floor(s.score))};
+        }
+      } catch(e){ /* Local storage can be disabled; game remains playable. */ }
+    }
+    function saveState(){try{localStorage.setItem(STORE_KEY,JSON.stringify(state));}catch(e){ /* no storage */ }}
+    function showScreen(which){
+      screens.forEach(x=>$('screen-'+x).hidden=x!==which);
+      window.scrollTo({top:0,behavior:'instant'});
+      updateHud();
+    }
+    function updateHud(){
+      $('global-score').textContent=(state.score+(game && !state.completed.includes(game.mission.id) && !game.failed ? game.earned : 0)).toLocaleString('es-MX');
+      $('global-progress').textContent=state.completed.length+'/5';
+    }
+    function toast(msg){
+      $('toast').textContent=msg; $('toast').hidden=false;
+      clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,2600);
+    }
+    function playSound(kind='ok'){
+      if(muted)return;
+      try{
+        const Context=window.AudioContext||window.webkitAudioContext;
+        if(!Context)return;
+        soundContext=soundContext||new Context();
+        if(soundContext.state==='suspended')soundContext.resume();
+        const now=soundContext.currentTime;
+        const notes=kind==='ok'?[520,680,900]:kind==='win'?[392,523,659,784,1046]:[310,260];
+        notes.forEach((freq,i)=>{
+          const osc=soundContext.createOscillator(),gain=soundContext.createGain(),start=now+i*.09;
+          osc.type='sine';osc.frequency.value=freq;gain.gain.setValueAtTime(.0001,start);gain.gain.exponentialRampToValueAtTime(.09,start+.015);gain.gain.exponentialRampToValueAtTime(.0001,start+.17);osc.connect(gain);gain.connect(soundContext.destination);osc.start(start);osc.stop(start+.19);
+        });
+      }catch(e){/* Sound is optional. */}
+    }
+    function startGame(e){
+      e.preventDefault();
+      const name=$('player-name').value.trim().replace(/\s+/g,' ');
+      if(!name){$('player-name').focus();return;}
+      const group=$('player-group').value.trim();
+      if(state.name && state.name!==name){state=newState();}
+      state.name=name;state.group=group;saveState();showMap();
+    }
+    function showMap(){
+      game=null;
+      const done=state.completed.length;
+      $('map-greeting').textContent=`Agente ${state.name}, ${done===5?'¡has restaurado todos los mundos!':'la ciudad necesita tu ayuda. ¡Avanza al siguiente portal!'}`;
+      $('map-percent').textContent=(done*20)+'%';$('map-bar').style.width=(done*20)+'%';
+      const map=$('world-map');map.replaceChildren();
+      MISSIONS.forEach((mission,i)=>{
+        const completed=state.completed.includes(mission.id);
+        const unlocked=completed || i===0 || state.completed.includes(MISSIONS[i-1].id);
+        const card=document.createElement('button');card.type='button';card.className='world-card '+(completed?'done':unlocked?'current':'locked');card.disabled=!unlocked;
+        card.style.setProperty('--worldColor',mission.color);
+        card.setAttribute('aria-label',`Misión ${i+1}: ${mission.title}. ${completed?'Completada, se puede repetir':unlocked?'Disponible':'Bloqueada'}`);
+        const status=completed?'✓ MISIÓN SUPERADA':unlocked?'⚡ PORTAL DISPONIBLE':'🔒 BLOQUEADO';
+        card.innerHTML=`<div class="world-status">${status}</div><div class="world-illustration"><span class="emblem">${mission.icon}</span><span class="world-number">0${i+1}</span></div><div class="world-name">${mission.title}</div><div class="world-desc">${mission.short}</div><div class="world-action">${completed?'↻ VOLVER A JUGAR':unlocked?'▶ ENTRAR A ESTE MUNDO':'SUPERA EL NIVEL ANTERIOR'}</div>`;
+        if(unlocked)card.addEventListener('click',()=>startMission(i));
+        map.append(card);
+      });
+      showScreen('map');
+    }
+    function startMission(i){
+      const mission=MISSIONS[i];
+      if(!mission)return;
+      if(i>0 && !state.completed.includes(mission.id) && !state.completed.includes(MISSIONS[i-1].id))return;
+      game={index:i,mission,qIndex:0,lives:3,earned:0,wrongChoices:new Set(),answered:false,failed:false,hadMistake:false};
+      $('sidebar-icon').textContent=mission.icon;$('sidebar-title').textContent=mission.title;$('sidebar-story').textContent=mission.intro;
+      showScreen('play');renderQuestion();
+    }
+    function renderQuestion(){
+      if(!game)return;
+      const q=game.mission.questions[game.qIndex];game.wrongChoices=new Set();game.answered=false;game.hadMistake=false;
+      $('question-tag').textContent=`NIVEL 0${game.index+1} · ${game.mission.place.toUpperCase()}`;
+      $('question-count').textContent=`DESAFÍO ${game.qIndex+1}/${game.mission.questions.length}`;
+      $('question-title').textContent=q.title;$('scene-emoji').textContent=q.icon;$('scene-text').textContent=q.scene;
+      $('feedback').hidden=true;$('feedback').textContent='';$('next-question').hidden=true;
+      const answers=$('answers');answers.replaceChildren();
+      q.options.forEach((option,i)=>{
+        const b=document.createElement('button');b.type='button';b.className='answer';
+        const key=document.createElement('span');key.className='key';key.textContent=i+1;
+        const txt=document.createElement('span');txt.textContent=option;
+        b.append(key,txt);b.addEventListener('click',()=>chooseAnswer(i));answers.append(b);
+      });
+      updatePlayHud();
+    }
+    function updatePlayHud(){
+      if(!game)return;
+      $('hearts').textContent='💗'.repeat(game.lives)+'🖤'.repeat(3-game.lives);
+      $('hearts').setAttribute('aria-label',game.lives+' vidas restantes');
+      $('mission-score').textContent=game.earned.toLocaleString('es-MX');
+      const dots=$('q-dots');dots.replaceChildren();
+      game.mission.questions.forEach((_,i)=>{
+        const d=document.createElement('span');d.className='q-dot '+(i<game.qIndex?'past':i===game.qIndex?'now':'');dots.append(d);
+      });updateHud();
+    }
+    function chooseAnswer(selected){
+      if(!game || game.failed || game.answered || game.wrongChoices.has(selected))return;
+      const q=game.mission.questions[game.qIndex],buttons=Array.from($('answers').children),feedback=$('feedback');
+      if(selected!==q.correct){
+        game.wrongChoices.add(selected);game.hadMistake=true;game.lives--;
+        buttons[selected].classList.add('incorrect');buttons[selected].disabled=true;
+        feedback.hidden=false;feedback.className='feedback bad';feedback.replaceChildren();
+        const strong=document.createElement('strong');strong.textContent='⚠️ ¡Cuidado, agente!';
+        feedback.append(strong,document.createTextNode('Esa opción no resuelve la misión. Piensa en el contexto e inténtalo de nuevo.'));
+        playSound('wrong');updatePlayHud();
+        if(game.lives<=0){game.failed=true;setTimeout(()=>{if(game && game.failed)showScreen('failed');},400);}
+        return;
+      }
+      game.answered=true;const points=game.hadMistake?60:100;game.earned+=points;
+      buttons.forEach((b,i)=>{b.disabled=true;if(i===q.correct)b.classList.add('correct');});
+      feedback.hidden=false;feedback.className='feedback';feedback.replaceChildren();
+      const strong=document.createElement('strong');strong.textContent=`✅ ¡Correcto! +${points} puntos`;
+      feedback.append(strong,document.createTextNode(q.why));
+      $('next-question').hidden=false;$('next-question').textContent=game.qIndex===game.mission.questions.length-1?'🏁 TERMINAR MISIÓN':'SIGUIENTE DESAFÍO →';
+      playSound('ok');updatePlayHud();
+    }
+    function nextQuestion(){
+      if(!game || !game.answered)return;
+      if(game.qIndex+1<game.mission.questions.length){game.qIndex++;renderQuestion();}
+      else completeMission();
+    }
+    function completeMission(){
+      if(!game)return;
+      const {mission,index,lives,earned}=game;const bonus=150;
+      const wasCompleted=state.completed.includes(mission.id);
+      if(!wasCompleted){state.completed.push(mission.id);state.score+=earned+bonus;saveState();}
+      game=null;playSound('win');
+      if(state.completed.length===MISSIONS.length){showVictory();return;}
+      $('clear-symbol').textContent=mission.icon;
+      $('clear-title').textContent=wasCompleted?'¡Gran entrenamiento!':'¡Zona restaurada!';
+      $('clear-text').textContent=wasCompleted?'Repetiste esta misión para seguir practicando. Tu puntuación acumulada se mantiene sin cambios.':`¡Excelente, agente ${state.name}! Has recuperado ${mission.place} y desbloqueado el siguiente portal. Bonus por misión: +${bonus} puntos.`;
+      $('clear-points').textContent=wasCompleted?'Práctica':(earned+bonus).toLocaleString('es-MX');
+      $('clear-hearts').textContent=String(lives);$('clear-completed').textContent=state.completed.length+'/5';
+      $('clear-next').textContent=index<4?'➡ SIGUIENTE NIVEL':'🗺️ REGRESAR AL MAPA';
+      $('clear-next').onclick=()=>index<4?startMission(index+1):showMap();
+      showScreen('clear');
+    }
+    function showVictory(){
+      $('winner-name').textContent=state.name;$('win-score').textContent=state.score.toLocaleString('es-MX');
+      $('cert-name').textContent=state.name;
+      $('cert-group').textContent=state.group?'Grado y grupo: '+state.group:'Estudiante de secundaria';
+      $('cert-date').textContent=new Date().toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'});
+      $('cert-score').textContent=state.score.toLocaleString('es-MX');showScreen('victory');
+    }
+    function resetGame(){
+      if(!window.confirm('¿Iniciar una nueva partida? Se borrará el avance guardado en este navegador.'))return;
+      state=newState();game=null;saveState();$('player-name').value='';$('player-group').value='';$('start-action').textContent='🚀 INICIAR AVENTURA';showScreen('start');$('player-name').focus();
+    }
+    $('start-form').addEventListener('submit',startGame);
+    $('back-map').addEventListener('click',()=>{if(window.confirm('¿Salir de este nivel? El intento actual no se guardará.'))showMap();});
+    $('next-question').addEventListener('click',nextQuestion);
+    $('retry-level').addEventListener('click',()=>game&&startMission(game.index));
+    $('failed-map').addEventListener('click',showMap);
+    $('clear-map').addEventListener('click',showMap);
+    $('win-map').addEventListener('click',showMap);
+    $('new-game').addEventListener('click',resetGame);
+    $('certificate-btn').addEventListener('click',()=>{showVictory();window.print();});
+    $('sound-toggle').addEventListener('click',()=>{muted=!muted;$('sound-toggle').textContent=muted?'🔇 Sonido':'🔊 Sonido';$('sound-toggle').setAttribute('aria-pressed',String(!muted));if(!muted)playSound('ok');});
+    document.addEventListener('keydown',e=>{
+      if($('screen-play').hidden||!game||game.answered||game.failed||e.altKey||e.ctrlKey||e.metaKey)return;
+      const n=Number(e.key);
+      if(n>=1 && n<=4 && n<=game.mission.questions[game.qIndex].options.length){e.preventDefault();chooseAnswer(n-1);}
+    });
+    readState();
+    $('player-name').value=state.name;$('player-group').value=state.group;
+    if(state.name){$('start-action').textContent='🚀 CONTINUAR AVENTURA';}
+    showScreen('start');
+  </script>
+</body>
+</html>
